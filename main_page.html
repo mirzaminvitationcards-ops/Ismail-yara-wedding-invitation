@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wedding Invitation - Ismail & Yara</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Background Animated Blobs -->
+    <div class="background-blobs">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+    </div>  
+
+    <!-- Envelope Wrapper Container -->
+    <div class="envelope-wrapper" id="envelopeWrapper">
+        
+        <!-- Invitation Card -->
+        <div class="invitation-card">
+            <div class="avatar-circle">
+                <img src="heart.png" alt="Heart Icon" style="width: 40px; height: 40px;" onerror="this.src='https://cdn-icons-png.flaticon.com/512/833/833472.png'">
+            </div>
+
+            <h1 class="name">ISMAIL</h1>
+            <span class="and-text">&</span>
+            <h1 class="name">YARA</h1>
+
+            <div class="elegant-line"></div>
+
+            <p class="wedding-date">September 04, 2026</p>
+            <p class="invite-text">cordially invite.</p>
+
+            <a href="details.html" class="open-btn">Open</a>
+        </div>
+
+        <!-- 3D Envelope Base -->
+        <div class="envelope">
+            <div class="flap"></div>
+            <div class="pocket"></div>
+            <div class="wax-seal" id="waxSeal">
+                <span style="font-size: 25px;">♥</span>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        const waxSeal = document.getElementById('waxSeal');
+        const envelopeWrapper = document.getElementById('envelopeWrapper');
+
+        waxSeal.addEventListener('click', (e) => {
+            e.stopPropagation();
+            envelopeWrapper.classList.add('open');
+        });
+
+        window.addEventListener('load', () => {
+            let guestName = localStorage.getItem('wedding_guest_name');
+            if (!guestName) {
+                guestName = prompt("Please enter your name to view the invitation:");
+                if (guestName && guestName.trim() !== "") {
+                    localStorage.setItem('wedding_guest_name', guestName);
+                }
+            }
+        });
+    </script>
+</body>
+</html>
