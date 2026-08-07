@@ -11,19 +11,30 @@ html, body {
 }
 
 body {
-    /* Set to back.png or back.jpg depending on your file name */
-    background-image: url("back.png"); 
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-attachment: fixed;
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', 'Cairo', sans-serif;
+    color: #1e293b;
     min-height: 100vh;
-    min-height: 100dvh;
     display: flex;
     justify-content: center;
-    align-items: center;
-    font-family: 'Inter', sans-serif;
-    color: #1e293b;
+    align-items: flex-start; /* Changed to start so scrolling works better */
+    overflow-x: hidden;
+    background-color: #fdfaf3; /* Fallback color */
+}
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* Replace back.png with your image name */
+    background-image: url("back.webp"); 
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    z-index: -1; /* This keeps it behind the text */
 }
 
 /* Ensure background image stays covered nicely on mobile devices */
@@ -35,11 +46,14 @@ body {
     }
 }
 
-.main-content { 
-    text-align: center; 
-    width: 100%; 
-    max-width: 500px; 
-    padding: 80px 20px; 
+.main-content {
+    position: relative;
+    z-index: 1; /* Keeps content above the background */
+    text-align: center;
+    width: 100%;
+    max-width: 500px;
+    padding: 40px 20px 100px 20px; /* More bottom padding for mobile */
+    margin: 0 auto;
 }
 
 /* --- FLOATING MUSIC BUTTON --- */
@@ -417,13 +431,56 @@ body {
     color: white;
 }
 
-.omar-credit { 
-    font-size: 10px; 
-    color: #94a3b8; 
-    text-transform: lowercase; 
-    margin-top: 15px; 
-    letter-spacing: 1px; 
-    opacity: 0.6; 
+/* Container to center the badge */
+.credit-badge-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+    padding-bottom: 20px;
+}
+
+/* The White Oval Background */
+.credit-oval-badge {
+    background-color: white;
+    padding: 10px 25px;
+    border-radius: 50px; /* Makes it a perfect oval */
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08); /* Soft elegant shadow */
+    border: 1px solid rgba(0, 0, 0, 0.03);
+}
+
+/* "made by" text style */
+.made-by-text {
+    font-size: 10px;
+    color: #94a3b8;
+    text-transform: lowercase;
+    letter-spacing: 1px;
+    font-family: 'Inter', sans-serif;
+}
+
+/* MIRZAM logo style */
+.mirzam-logo-link {
+    font-family: 'Montserrat', sans-serif;
+    text-decoration: none;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: #0a1128; /* Navy Blue */
+    font-size: 11px;
+    transition: all 0.3s ease;
+}
+
+/* .EG gold style */
+.mirzam-logo-link .gold-text {
+    color: #c5a059; /* Gold accent */
+    font-weight: 400;
+}
+
+.mirzam-logo-link:hover {
+    opacity: 0.7;
+    transform: scale(1.02);
 }
 
 /* --- MODAL POPUP STYLES --- */
@@ -518,5 +575,10 @@ body {
 
     .photo-placeholder {
         height: 140px;
+    }
+}
+@media screen and (max-width: 768px) {
+    body::before {
+        background-attachment: scroll; /* Better performance on older phones */
     }
 }
