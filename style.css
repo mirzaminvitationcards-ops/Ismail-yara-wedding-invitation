@@ -105,6 +105,14 @@
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
 }
 
+
+.avatar-circle img {
+    filter: brightness(0) invert(1);
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+}
+
 .avatar-circle {
     width: 70px;
     height: 70px;
@@ -114,10 +122,9 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background: #1e293b;
+    background: #1e293b; 
     overflow: hidden;
 }
-
 .name {
     font-family: 'Cinzel', serif;
     font-size: 38px;
