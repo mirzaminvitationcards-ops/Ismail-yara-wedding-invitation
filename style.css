@@ -7,36 +7,7 @@
     box-sizing: border-box;
 }
 
-body {
-    background: linear-gradient(135deg, #238ea0 0%, #4b2c8a 100%);
-    min-height: 100dvh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-family: 'Inter', sans-serif;
-    overflow: hidden; /* Prevents scrolling on the main page */
-}
 
-/* --- BACKGROUND ANIMATED BLOBS --- */
-.background-blobs {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100dvh;
-    z-index: 0;
-}
-
-.blob {
-    position: absolute;
-    border-radius: 50%;
-    filter: blur(120px);
-    opacity: 0.4;
-    animation: move 20s infinite alternate;
-}
-
-.blob-1 { width: 600px; height: 600px; background: #1e40af; top: -150px; left: -150px; }
-.blob-2 { width: 500px; height: 500px; background: #4c1d95; bottom: -100px; right: -100px; }
 
 @keyframes move {
     from { transform: translate(0, 0); }
@@ -121,8 +92,8 @@ body {
     top: 10px;
     left: 50%;
     transform: translateX(-50%) scale(0.9);
-    width: 380px;
-    height: 480px;
+    width: 350px;
+    height: 470px;
     background: #fdfaf3;
     border-radius: 30px;
     padding: 35px 25px;
@@ -149,7 +120,7 @@ body {
 
 .name {
     font-family: 'Cinzel', serif;
-    font-size: 28px;
+    font-size: 38px;
     letter-spacing: 3px;
     color: #1e293b;
     line-height: 1.1;
@@ -159,7 +130,7 @@ body {
 .and-text {
     font-family: 'Playfair Display', serif;
     font-style: italic;
-    font-size: 36px;
+    font-size: 52px;
     color: #5dade2;
     display: block;
     margin: 8px 0;
@@ -172,8 +143,20 @@ body {
     margin: 15px auto;
 }
 
-.wedding-date { font-weight: 700; color: #1e293b; font-size: 16px; }
-.invite-text { color: #94a3b8; font-size: 13px; margin-bottom: 25px; }
+/* --- DATE SIZE INCREASE --- */
+.wedding-date { 
+    font-weight: 700; 
+    color: #1e293b; 
+    font-size: 19px; /* Increased from 16px */
+    letter-spacing: 1px;
+}
+
+/* --- INVITE TEXT SIZE INCREASE --- */
+.invite-text { 
+    color: #94a3b8; 
+    font-size: 19px; /* Increased from 13px */
+    margin-bottom: 30px; 
+}
 
 .open-btn {
     display: block;
@@ -200,13 +183,16 @@ body {
     z-index: 10;
 }
 
-/* --- MOBILE SCALING (Matched to 7:52 Look) --- */
 @media (max-width: 600px) {
-    .envelope-wrapper { 
-        transform: scale(0.8); /* This is the key change */
-        margin-top: 100px; 
-    }
-    .envelope-wrapper.open .invitation-card { 
-        transform: translate(-50%, -180px) scale(1); 
+    .envelope-wrapper { transform: scale(0.8); margin-top: 100px; }
+    .envelope-wrapper.open .invitation-card { transform: translate(-50%, -180px) scale(1); }
+}
+
+/* Ensure background image stays covered nicely on mobile devices */
+@media screen and (max-width: 768px) {
+    body {
+        background-attachment: scroll;
+        background-size: cover;
+        background-position: center top;
     }
 }
