@@ -1,290 +1,406 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wedding Details</title>
-    <link rel="stylesheet" href="details.css">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Playfair+Display:ital,wght@1,400&family=Inter:wght@400;700;800&display=swap" rel="stylesheet">
-    <style>
-        /* ADDED CSS FOR THE DELETE BUTTON */
-        .wish-card { position: relative; }
-        .delete-wish-btn {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            background: #fee2e2;
-            color: #ef4444;
-            border: none;
-            padding: 5px 10px;
-            border-radius: 5px;
-            font-size: 12px;
-            cursor: pointer;
-            transition: 0.3s;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            font-weight: 700;
-        }
-        .delete-wish-btn:hover { background: #fecaca; transform: scale(1.05); }
-    </style>
-</head>
-<body>
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Wedding Details - Ismail & Yara</title>
+        <link rel="stylesheet" href="details.css">
+        <!-- FontAwesome for Icons -->
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+        <!-- Premium Fonts -->
+        <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Playfair+Display:ital,wght@1,400&family=Inter:wght@400;700;800&display=swap" rel="stylesheet">
+        <style>
+            /* Delete button styling for guestbook entries */
+            .wish-card { position: relative; }
+            .delete-wish-btn {
+                position: absolute;
+                top: 15px;
+                right: 15px;
+                background: #fee2e2;
+                color: #ef4444;
+                border: none;
+                padding: 5px 10px;
+                border-radius: 5px;
+                font-size: 12px;
+                cursor: pointer;
+                transition: 0.3s;
+                font-weight: 700;
+            }
+            .delete-wish-btn:hover { background: #fecaca; transform: scale(1.05); }
+        </style>
+    </head>
+    <body>
 
-    <!-- FLOATING MUSIC BUTTON -->
-    <div class="music-controller">
-        <button id="musicBtn" class="floating-music-btn" onclick="toggleMusic()">
-            <i id="musicIcon" class="fas fa-play"></i>
-            <span id="musicText">PLAY MUSIC</span>
-        </button>
+        <!-- AUDIO ELEMENT -->
+        <audio id="weddingMusic" loop autoplay>
+            <source src="wedding-song.mp3" type="audio/mpeg">
+        </audio>
+
+        <div class="main-content">
+            <!-- 1. HEADER SECTION -->
+            <h1 class="title">CEREMONY INFO</h1>
+            <p class="announcement" id="invitation-text">WE JOYFULLY ANNOUNCE THE<br>WEDDING OF OUR CHILDREN</p>
+            <div class="blue-line"></div>
+
+            <div class="names-stack">
+                <h2 class="main-name">ISMAIL</h2>
+                <span class="role">GROOM</span>
+                <span class="small-ampersand">&</span>
+                <h2 class="main-name">YARA</h2>
+                <span class="role">BRIDE</span>
+                <div class="name-finish-line"></div>
+            </div>
+
+            <!-- 2. PHOTO GALLERY -->
+            <div class="gallery-section" id="gallery-section">
+                <h3 class="gallery-title">PHOTO GALLERY</h3>
+                <div class="photo-grid">
+                    <div class="photo-placeholder"><img src="pngtree-cartoon-bride-and-groom-appear-png-image_20553976.webp" alt="Wedding Photo 1"></div>
+                    <div class="photo-placeholder"><img src="pngtree-cartoon-bride-and-groom-appear-png-image_20553976.webp" alt="Wedding Photo 2"></div>
+                </div>
+            </div>
+
+            <!-- 3. RECEPTION & COUNTDOWN -->
+            <div class="reception-section" id="reception-section">
+                <div class="mini-blue-line"></div>
+                <h2 class="gallery-title">RECEPTION INFO</h2>
+                <div class="time-date-box">
+                    <span class="big-time">08:00</span>
+                    <div class="date-divider"></div>
+                    <span class="big-date">FRIDAY | 04 | SEPTEMBER</span>
+                </div>
+
+                <div id="countdown" class="countdown-container">
+                    <div class="time-unit"><span id="days">00</span><label>Days</label></div>
+                    <div class="time-unit"><span id="hours">00</span><label>Hours</label></div>
+                    <div class="time-unit"><span id="minutes">00</span><label>Mins</label></div>
+                    <div class="time-unit"><span id="seconds">00</span><label>Secs</label></div>
+                </div>
+            </div>
+
+            <!-- 4. CALENDAR -->
+            <div class="calendar-wrapper">
+                <img src="096549f7-6231-488b-a4a4-dbf3e3348906.webp" alt="September 2026 Calendar">
+            </div>
+
+            <!-- 5. VENUE SECTION -->
+            <div class="venue-section" id="venue-section">
+                <div class="mini-blue-line"></div> 
+                <h3 class="gallery-title">RECEPTION VENUE</h3>
+                <p class="venue-name">LAMOUR VIP</p>
+                <p class="venue-location">Al-Remaya Square, Giza</p>
+                <a href="https://maps.app.goo.gl/52Trp4tfgz3rrwZH6" target="_blank" class="map-link-btn">VIEW ON MAP</a>
+            </div>
+
+            <!-- 6. DAY SCHEDULE -->
+            <div class="schedule-section">
+                <div class="mini-blue-line"></div>
+                <h3 class="gallery-title">DAY SCHEDULE</h3>
+                <div class="timeline">
+                    <div class="timeline-item"><div class="time">06:30</div><div class="dot-container"><div class="dot"></div></div><div class="event">Welcome</div></div>
+                    <div class="timeline-item"><div class="time">07:00</div><div class="dot-container"><div class="dot"></div></div><div class="event">Reception</div></div>
+                    <div class="timeline-item"><div class="time">08:00</div><div class="dot-container"><div class="dot"></div></div><div class="event">Party</div></div>
+                    <div class="timeline-item"><div class="time">08:45</div><div class="dot-container"><div class="dot"></div></div><div class="event">Being ready</div></div>
+                    <div class="timeline-item"><div class="time">09:30</div><div class="dot-container"><div class="dot"></div></div><div class="event">Buffet</div></div>
+                    <div class="timeline-item"><div class="time">10:15</div><div class="dot-container"><div class="dot"></div></div><div class="event">temporary</div></div>
+                    <div class="timeline-item"><div class="time">00:00</div><div class="dot-container"><div class="dot"></div></div><div class="event">End</div></div>
+                </div>
+            </div>
+    <div class="rsvp-section" id="rsvp-section">
+        <div class="mini-blue-line"></div>
+        
+        <!-- This is the "ATTENDANCE" heading -->
+        <h3 class="gallery-title">ATTENDANCE</h3>
+        
+        <!-- This is the "Will you join us?..." tagline -->
+        <p style="font-family:'Playfair Display'; font-style:italic; margin-bottom:20px; color: #1e293b;">
+            Will you join us? Confirm your attendance 
+        </p>
+    <div class="rsvp-form">
+        <input type="text" id="rsvp-name" class="rsvp-input" placeholder="Your name">
+        
+        <div class="guest-counter-container">
+            <span class="guest-label">Accompanying guests</span>
+            <div class="counter-controls">
+                <button class="cnt-btn" onclick="updateGuests(-1)">−</button>
+                <span id="guest-count-display">0</span>
+                <button class="cnt-btn" onclick="updateGuests(1)">+</button>
+            </div>
+        </div>
+
+        <button onclick="submitRSVP()" class="rsvp-confirm-btn">Confirm Attendance 💍</button>
+
+        <!-- ADD THIS NEW BUTTON HERE -->
+        <button onclick="checkAdminAccess()" class="admin-view-btn">Check number of guests</button>
+
+        <p id="rsvp-status" style="font-size: 14px; margin-top: 15px; color: #60a5fa; font-weight:700; display: none;">Thank you! Confirmed. ✨</p>
     </div>
 
-    <!-- AUDIO ELEMENT -->
-    <audio id="weddingMusic" loop autoplay>
-        <source src="wedding-song.mp3" type="audio/mpeg">
-    </audio>
-
-    <div class="main-content">
-        <h1 class="title">CEREMONY INFO</h1>
-       <p class="announcement" id="invitation-text">WE JOYFULLY ANNOUNCE THE<br>WEDDING OF OUR CHILDREN</p>
-
-        <div class="blue-line"></div>
-
-        <div class="names-stack">
-            <h2 class="main-name">ISMAIL</h2>
-            <span class="role">GROOM</span>
-            <span class="small-ampersand">&</span>
-            <h2 class="main-name">YARA</h2>
-            <span class="role">BRIDE</span>
-            <div class="name-finish-line"></div>
-        </div>
-
-        <div class="gallery-section">
-            <h3 class="gallery-title">PHOTO GALLERY</h3>
-            <div class="photo-grid">
-                <div class="photo-placeholder"><img src="pngtree-cartoon-bride-and-groom-appear-png-image_20553976.webp" alt="Photo 1"></div>
-                <div class="photo-placeholder"><img src="pngtree-cartoon-bride-and-groom-appear-png-image_20553976.webp" alt="Photo 2"></div>
-            </div>
-        </div>
-
-        <div class="reception-section">
-            <h2 class="gallery-title">RECEPTION INFO</h2>
-            <div class="time-date-box">
-                <span class="big-time">08:00</span>
-                <div class="date-divider"></div>
-                <span class="big-date">FRIDAY | 04 | SEPTEMBER</span>
+            <!-- 8. GUESTBOOK SECTION -->
+            <div class="guestbook-section" id="guestbook-section">
+                <div class="mini-blue-line"></div>
+                <h3 class="gallery-title">GUESTBOOK</h3>
+                <form id="guestbook-form" class="guestbook-form">
+                    <input type="text" id="guest-name" placeholder="Your Name" required>
+                    <textarea id="guest-wish" placeholder="Write your wishes here..." rows="4" required></textarea>
+                    <button type="submit" class="oval-btn-small">SEND WISHES</button>
+                </form>
+                <div id="wishes-display" class="wishes-container"></div>
             </div>
 
-            <div id="countdown" class="countdown-container">
-                <div class="time-unit"><span id="days">00</span><label>Days</label></div>
-                <div class="time-unit"><span id="hours">00</span><label>Hours</label></div>
-                <div class="time-unit"><span id="minutes">00</span><label>Mins</label></div>
-                <div class="time-unit"><span id="seconds">00</span><label>Secs</label></div>
-            </div>
-        </div>
-
-        <div class="calendar-wrapper">
-            <img src="096549f7-6231-488b-a4a4-dbf3e3348906.webp" alt="September 2026 Calendar">
-        </div>
-
-        <div class="venue-section">
-            <div class="mini-blue-line"></div> 
-            <h3 class="gallery-title">RECEPTION VENUE</h3>
-            <p class="venue-name">LAMOUR VIP</p>
-            <p class="venue-location">Al-Remaya Square, Giza</p>
-            <a href="https://maps.app.goo.gl/52Trp4tfgz3rrwZH6" target="_blank" class="map-link-btn">VIEW ON MAP</a>
-        </div>
-
-        <div class="schedule-section">
-            <div class="mini-blue-line"></div>
-            <h3 class="gallery-title">DAY SCHEDULE</h3>
-            <div class="timeline">
-                <div class="timeline-item"><div class="time">06:30</div><div class="dot-container"><div class="dot"></div></div><div class="event">Welcome</div></div>
-                <div class="timeline-item"><div class="time">07:00</div><div class="dot-container"><div class="dot"></div></div><div class="event">Reception</div></div>
-                <div class="timeline-item"><div class="time">08:00</div><div class="dot-container"><div class="dot"></div></div><div class="event">Party</div></div>
-                <div class="timeline-item"><div class="time">08:45</div><div class="dot-container"><div class="dot"></div></div><div class="event">Being ready</div></div>
-                <div class="timeline-item"><div class="time">09:30</div><div class="dot-container"><div class="dot"></div></div><div class="event">Buffet</div></div>
-                <div class="timeline-item"><div class="time">10:15</div><div class="dot-container"><div class="dot"></div></div><div class="event">temporary</div></div>
-                <div class="timeline-item"><div class="time">00:00</div><div class="dot-container"><div class="dot"></div></div><div class="event">End</div></div>
-            </div>
-        </div>
-
-        <div class="guestbook-section">
-            <div class="mini-blue-line"></div>
-            <h3 class="gallery-title">GUESTBOOK</h3>
-            <form id="guestbook-form" class="guestbook-form">
-                <input type="text" id="guest-name" placeholder="Your Name" required>
-                <textarea id="guest-wish" placeholder="Write your wishes here..." rows="4" required></textarea>
-                <button type="submit" class="oval-btn-small">SEND WISHES</button>
-            </form>
+            <!-- ... End of guestbook-section ... -->
             <div id="wishes-display" class="wishes-container"></div>
+        </div> 
+
+            <!-- 9. FOOTER NAVIGATION -->
+            <div class="nav">
+                <a href="index.html" class="oval-btn">GO BACK</a>
+                
+                <div class="credit-badge-container">
+                    <div class="credit-oval-badge">
+                        <span class="made-by-text">made by</span> 
+                        <a href="https://mirzaminvitationcards-ops.github.io/mirzam.eg/Mirzam's_Main_page" target="_blank" class="mirzam-logo-link">
+                            MIRZAM<span class="gold-text">.EG</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div> 
+
+        <!-- ADMIN GUEST LIST MODAL -->
+        <div id="adminModal" class="modal-overlay">
+            <div class="modal-content">
+                <span class="close-modal" onclick="closeAdminModal()">&times;</span>
+                <h3 class="gallery-title" style="font-size: 20px; margin-top: 10px;">GUEST LIST</h3>
+                <div class="mini-blue-line"></div>
+                <div id="admin-stats" style="margin-bottom: 20px;">
+                    <p>Main Guests: <strong id="total-main-guests">0</strong></p>
+                    <p>Plus-ones: <strong id="total-plus-ones">0</strong></p>
+                </div>
+                <div id="guest-list-container" style="max-height: 300px; overflow-y: auto; text-align: left; font-size: 14px;">
+                    <!-- List generated by JS -->
+                </div>
+            </div>
         </div>
 
-        <div class="nav">
-            <a href="main_page.html" class="oval-btn">GO BACK</a>
-            
-            <!-- NEW AFTER PARTY BUTTON -->
-            <button onclick="accessAfterParty()" class="after-party-trigger">AFTER PARTY ACCESS</button>
-            
-       <div class="credit-badge-container">
-    <div class="credit-oval-badge">
-        <span class="made-by-text">made by</span> 
-        <a href="https://mirzaminvitationcards-ops.github.io/mirzam.eg/Mirzam's_Main_page" target="_blank" class="mirzam-logo-link">
-            MIRZAM<span class="gold-text">.EG</span>
-        </a>
-    </div>
-</div>
+        <!-- AFTER PARTY MODAL -->
+        <div id="partyModal" class="modal-overlay">
+            <div class="modal-content">
+                <span class="close-modal" onclick="closeModal()">&times;</span>
+                <h3 class="gallery-title" style="font-size: 20px; margin-top: 10px;">AFTER PARTY</h3>
+                <div class="mini-blue-line"></div>
+                <p class="venue-name" style="font-size: 18px;">Private Celebration</p>
+                <p class="venue-location">Click below to find the secret location.</p>
+                <a href="https://www.google.com/maps?q=29.968673706054688,30.958772659301758" target="_blank" class="map-link-btn">OPEN IN GOOGLE MAPS</a>
+            </div>
         </div>
-    </div> <!-- End of main-content -->
 
-    <!-- AFTER PARTY MODAL (Popup Window) -->
-    <div id="partyModal" class="modal-overlay">
-        <div class="modal-content">
-            <span class="close-modal" onclick="closeModal()">&times;</span>
-            <h3 class="gallery-title" style="font-size: 20px; margin-top: 10px;">AFTER PARTY</h3>
-            <div class="mini-blue-line"></div>
-            <p class="venue-name" style="font-size: 18px;">Private Celebration</p>
-            <p class="venue-location">Click below to find the secret location for our small after party celebration.</p>
-            <a href="https://www.google.com/maps?q=29.968673706054688,30.958772659301758&z=17&hl=en" target="_blank" class="map-link-btn">OPEN IN GOOGLE MAPS</a>
-        </div>
-    </div>
+        <!-- FLOATING TAB BAR -->
+        <nav class="floating-nav">
+            <div id="locationSubMenu" class="location-submenu">
+                <a href="javascript:void(0)" onclick="scrollToSection('venue-section')"><i class="fas fa-hotel"></i> Wedding Hall</a>
+                <div class="menu-divider"></div>
+                <a href="javascript:void(0)" onclick="accessAfterParty()"><i class="fas fa-glass-cheers"></i> Private Party</a>
+            </div>
 
-    <script>
-   /* --- 1. Personalized Greeting Logic --- */
-window.addEventListener('load', () => {
-    // This line looks for the name we just saved in the first page
-    let guestName = localStorage.getItem('wedding_guest_name');
-    if (!guestName || guestName.trim() === "") guestName = "Guest";
+            <div class="nav-container">
+                <a href="javascript:void(0)" onclick="scrollToSection('guestbook-section')" class="nav-item"><i class="far fa-comment-dots"></i><span>Wishes</span></a>
+                <a href="javascript:void(0)" onclick="scrollToSection('rsvp-section')" class="nav-item"><i class="far fa-heart"></i><span>RSVP</span></a>
+                <a href="javascript:void(0)" onclick="toggleLocationMenu(event)" class="nav-item"><i class="fas fa-map-marker-alt"></i><span>Location</span></a>
+                <a href="javascript:void(0)" onclick="scrollToSection('reception-section')" class="nav-item"><i class="far fa-clock"></i><span>Time</span></a>
+                <div class="nav-item" onclick="toggleMusic()" style="cursor:pointer;">
+                    <i id="navMusicIcon" class="fas fa-pause"></i>
+                    <span id="navMusicText">Stop</span>
+                </div>
+            </div>
+        </nav>
 
-    const inviteElement = document.getElementById('invitation-text');
-    if (inviteElement) {
-        // This line injects the name into the "We are delighted to invite you..." section
-        inviteElement.innerHTML = `We are delighted to invite you <br> 
-            <span style="color: #60a5fa; font-size: 18px; font-weight: 800; text-transform: uppercase;">"${guestName}"</span> <br> 
-            to share in our special day…`;
-    }
-    // Also pre-fills the guestbook name field
-    const guestbookInput = document.getElementById('guest-name');
-    if (guestbookInput) guestbookInput.value = guestName;
-});
+        <script>
+            /* --- 1. SETUP & PERSONALIZED NAME --- */
+            let accompanyingGuests = 0;
+            let myUserId = localStorage.getItem('wedding_user_id') || 'user_' + Math.random().toString(36).substr(2, 9);
+            localStorage.setItem('wedding_user_id', myUserId);
 
-/* --- Final Music Fix (State-Sync) --- */
-const music = document.getElementById("weddingMusic");
-const musicBtn = document.getElementById("musicBtn");
-const musicIcon = document.getElementById("musicIcon");
-const musicLabel = document.getElementById("musicText");
+            window.addEventListener('load', () => {
+                let guestName = localStorage.getItem('wedding_guest_name');
+                if (!guestName || guestName.trim() === "") guestName = "Guest";
 
-// 1. THE BRAIN: This function makes the button match the ACTUAL music state
-function syncButtonWithMusic() {
-    if (music.paused) {
-        musicBtn.classList.remove("playing");
-        musicIcon.className = "fas fa-play";
-        musicLabel.innerText = "PLAY MUSIC";
-    } else {
-        musicBtn.classList.add("playing");
-        musicIcon.className = "fas fa-pause";
-        musicLabel.innerText = "STOP MUSIC";
-    }
-}
+                document.getElementById('invitation-text').innerHTML = `We are delighted to invite you <br> 
+                    <span style="color: #60a5fa; font-size: 18px; font-weight: 800; text-transform: uppercase;">"${guestName}"</span> <br> 
+                    to share in our special day…`;
+                
+                document.getElementById('guest-name').value = guestName;
+                document.getElementById('rsvp-name').value = guestName;
+                loadWishes();
+            });
 
-// 2. TELL THE MUSIC TO UPDATE THE BUTTON:
-// These run automatically whenever the music starts or stops
-music.onplay = syncButtonWithMusic;
-music.onpause = syncButtonWithMusic;
+            /* --- 2. SMART MUSIC LOGIC --- */
+            const weddingAudio = document.getElementById("weddingMusic");
+            const navMusicIcon = document.getElementById("navMusicIcon");
+            const navMusicText = document.getElementById("navMusicText");
 
-// 3. THE TOGGLE: Only handle the audio, let the sync above handle the UI
-function toggleMusic() {
-    if (music.paused) {
-        music.play().catch(e => console.log("Playback blocked"));
-    } else {
-        music.pause();
-    }
-}
+            function toggleMusic() {
+                if (weddingAudio.paused) {
+                    weddingAudio.play().catch(e => console.log("Playback error"));
+                } else {
+                    weddingAudio.pause();
+                }
+            }
 
-// 4. THE MOBILE FIX: First touch starts the music
-function handleFirstInteraction() {
-    if (music.paused) {
-        music.play().then(() => {
-            // Once it starts, the 'onplay' event above will fix the button instantly
-            window.removeEventListener('touchstart', handleFirstInteraction);
-            window.removeEventListener('click', handleFirstInteraction);
-        }).catch(e => console.log("Waiting for user..."));
-    }
-}
+            function updateMusicUI() {
+                if (weddingAudio.paused) {
+                    navMusicIcon.className = "fas fa-play";
+                    navMusicText.innerText = "Play";
+                } else {
+                    navMusicIcon.className = "fas fa-pause";
+                    navMusicText.innerText = "Stop";
+                }
+            }
 
-window.addEventListener('touchstart', handleFirstInteraction);
-window.addEventListener('click', handleFirstInteraction);
+            weddingAudio.addEventListener('play', updateMusicUI);
+            weddingAudio.addEventListener('pause', updateMusicUI);
 
-// Also try to start on load for PC
-window.addEventListener('DOMContentLoaded', () => {
-    syncButtonWithMusic(); // Set initial state
-    setTimeout(() => { music.play().catch(() => {}); }, 1000);
-});
+            // Mobile Interaction Trigger
+            window.addEventListener('touchstart', () => {
+                if (weddingAudio.paused) weddingAudio.play().catch(() => {});
+            }, { once: true });
 
-    /* --- 3. Countdown Logic --- */
-    const targetDate = new Date("September 4, 2026 20:00:00").getTime();
-    setInterval(() => {
-        const now = new Date().getTime();
-        const dist = targetDate - now;
-        document.getElementById("days").innerText = Math.floor(dist / 86400000).toString().padStart(2, '0');
-        document.getElementById("hours").innerText = Math.floor((dist % 86400000) / 3600000).toString().padStart(2, '0');
-        document.getElementById("minutes").innerText = Math.floor((dist % 3600000) / 60000).toString().padStart(2, '0');
-        document.getElementById("seconds").innerText = Math.floor((dist % 60000) / 1000).toString().padStart(2, '0');
-    }, 1000);
+            /* --- 3. RSVP & COUNTER LOGIC --- */
+            function updateGuests(val) {
+                accompanyingGuests = Math.max(0, accompanyingGuests + val);
+                document.getElementById('guest-count-display').innerText = accompanyingGuests;
+            }
 
-    /* --- 4. Guestbook & Modal Logic --- */
-    let myId = localStorage.getItem('wedding_user_id') || 'user_' + Math.random().toString(36).substr(2, 9);
-    localStorage.setItem('wedding_user_id', myId);
+            function submitRSVP() {
+                const name = document.getElementById('rsvp-name').value;
+                if (!name) { alert("Please enter your name."); return; }
 
-    const wishForm = document.getElementById('guestbook-form');
-    const wishesDisplay = document.getElementById('wishes-display');
+                const rsvpData = {
+                    name: name,
+                    guests: accompanyingGuests,
+                    timestamp: new Date().toLocaleString()
+                };
 
-    window.addEventListener('load', loadWishes);
+                let allRSVPs = JSON.parse(localStorage.getItem('wedding_rsvps')) || [];
+                allRSVPs.push(rsvpData);
+                localStorage.setItem('wedding_rsvps', JSON.stringify(allRSVPs));
 
-    wishForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        const wishes = JSON.parse(localStorage.getItem('weddingWishes')) || [];
-        const newWish = {
-            id: Date.now(), 
-            ownerId: myId,
-            name: document.getElementById('guest-name').value,
-            wish: document.getElementById('guest-wish').value
-        };
-        wishes.unshift(newWish);
-        localStorage.setItem('weddingWishes', JSON.stringify(wishes));
-        document.getElementById('guest-wish').value = ""; 
-        loadWishes();
-    });
+                document.querySelector('.rsvp-confirm-btn').innerText = "Confirmed ✓";
+                document.querySelector('.rsvp-confirm-btn').disabled = true;
+                document.getElementById('rsvp-status').style.display = 'block';
+            }
 
-    function loadWishes() {
-        wishesDisplay.innerHTML = '';
-        const wishes = JSON.parse(localStorage.getItem('weddingWishes')) || [];
-        wishes.forEach(item => {
-            const card = document.createElement('div');
-            card.className = 'wish-card';
-            const deleteBtnHtml = item.ownerId === myId ? `<button class="delete-wish-btn" onclick="deleteWish(${item.id})"><i class="fas fa-trash-alt"></i> Delete</button>` : '';
-            card.innerHTML = `<h4>${item.name}</h4><p>"${item.wish}"</p>${deleteBtnHtml}`;
-            wishesDisplay.appendChild(card);
-        });
-    }
+            /* --- 4. ADMIN & AFTER PARTY LOGIC --- */
+            function checkAdminAccess() {
+                if (prompt("Admin password:") === "6677") {
+                    openAdminModal();
+                } else {
+                    alert("Wrong password.");
+                }
+            }
 
-    function deleteWish(id) {
-        if (confirm("Delete this message?")) {
-            let wishes = JSON.parse(localStorage.getItem('weddingWishes')).filter(w => w.id !== id);
-            localStorage.setItem('weddingWishes', JSON.stringify(wishes));
-            loadWishes();
+            function openAdminModal() {
+                const rsvps = JSON.parse(localStorage.getItem('wedding_rsvps')) || [];
+                const container = document.getElementById('guest-list-container');
+                let totalPlus = 0;
+                container.innerHTML = "";
+                rsvps.forEach(item => {
+                    totalPlus += parseInt(item.guests);
+                    const div = document.createElement('div');
+                    div.style.cssText = "border-bottom:1px solid #eee; padding:10px 0;";
+                    div.innerHTML = `<strong>${item.name}</strong><br>Plus ones: ${item.guests}`;
+                    container.appendChild(div);
+                });
+                document.getElementById('total-main-guests').innerText = rsvps.length;
+                document.getElementById('total-plus-ones').innerText = totalPlus;
+                document.getElementById('adminModal').style.display = 'flex';
+            }
+
+            function closeAdminModal() { document.getElementById('adminModal').style.display = 'none'; }
+
+            function accessAfterParty() {
+                if (prompt("Access code:") === "6627") {
+                    document.getElementById('partyModal').style.display = 'flex';
+                } else {
+                    alert("Wrong code.");
+                }
+            }
+
+            function closeModal() { document.getElementById('partyModal').style.display = 'none'; }
+
+            /* --- 5. NAVIGATION & SCROLLING --- */
+            function toggleLocationMenu(event) {
+                event.stopPropagation();
+                document.getElementById('locationSubMenu').classList.toggle('active');
+            }
+
+            document.addEventListener('click', (e) => {
+                const menu = document.getElementById('locationSubMenu');
+                if (menu && !menu.contains(e.target)) menu.classList.remove('active');
+            });
+
+            function scrollToSection(className) {
+                const section = document.querySelector('.' + className);
+                if (section) section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                document.getElementById('locationSubMenu').classList.remove('active');
+            }
+
+            /* --- 6. COUNTDOWN LOGIC --- */
+            const targetDate = new Date("September 4, 2026 20:00:00").getTime();
+            setInterval(() => {
+                const diff = targetDate - new Date().getTime();
+                document.getElementById("days").innerText = Math.floor(diff / 86400000).toString().padStart(2, '0');
+                document.getElementById("hours").innerText = Math.floor((diff % 86400000) / 3600000).toString().padStart(2, '0');
+                document.getElementById("minutes").innerText = Math.floor((diff % 3600000) / 60000).toString().padStart(2, '0');
+                document.getElementById("seconds").innerText = Math.floor((diff % 60000) / 1000).toString().padStart(2, '0');
+            }, 1000);
+
+            /* --- 7. GUESTBOOK LOGIC --- */
+            const wishForm = document.getElementById('guestbook-form');
+            const wishesDisplay = document.getElementById('wishes-display');
+
+            wishForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const wishes = JSON.parse(localStorage.getItem('weddingWishes')) || [];
+                wishes.unshift({
+                    id: Date.now(), 
+                    ownerId: myUserId,
+                    name: document.getElementById('guest-name').value,
+                    wish: document.getElementById('guest-wish').value
+                });
+                localStorage.setItem('weddingWishes', JSON.stringify(wishes));
+                wishForm.reset(); 
+                loadWishes();
+            });
+
+            function loadWishes() {
+                wishesDisplay.innerHTML = '';
+                const wishes = JSON.parse(localStorage.getItem('weddingWishes')) || [];
+                wishes.forEach(item => {
+                    const card = document.createElement('div');
+                    card.className = 'wish-card';
+                    const deleteBtn = item.ownerId === myUserId ? `<button class="delete-wish-btn" onclick="deleteWish(${item.id})">Delete</button>` : '';
+                    card.innerHTML = `<h4>${item.name}</h4><p>"${item.wish}"</p>${deleteBtn}`;
+                    wishesDisplay.appendChild(card);
+                });
+            }
+
+            function deleteWish(id) {
+                if (confirm("Delete this message?")) {
+                    let wishes = JSON.parse(localStorage.getItem('weddingWishes')).filter(w => w.id !== id);
+                    localStorage.setItem('weddingWishes', JSON.stringify(wishes));
+                    loadWishes();
+                }
+            }
+
+            function checkAdminAccess() {
+        const password = prompt("Admin access required:");
+        if (password === "6677") {
+            openAdminModal(); // This opens the guest list window
+        } else if (password !== null) {
+            alert("Wrong password.");
         }
     }
-
-    function accessAfterParty() {
-        const password = prompt("Please enter the access code:");
-        if (password === "6627") document.getElementById('partyModal').style.display = 'flex';
-        else if (password !== null) alert("Wrong password.");
-    }
-
-    function closeModal() { document.getElementById('partyModal').style.display = 'none'; }
-    window.onclick = function(event) { if (event.target == document.getElementById('partyModal')) closeModal(); }
-</script>
-</body>
-</html>
+        </script>
+    </body>
+    </html>
