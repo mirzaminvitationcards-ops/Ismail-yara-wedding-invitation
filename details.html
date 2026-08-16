@@ -402,12 +402,22 @@ setInterval(() => {
 window.addEventListener('load', () => {
     let autoScrollId;
     let isAutoScrolling = true;
+    let firstTouchDone = false; // NEW: Tracks the first tap
 
     // Function to stop the scrolling completely
     function stopAutoScroll(e) {
         // ONLY ignore the interaction if it is specifically the music button
         if (e && e.target && e.target.closest('[onclick="toggleMusic()"]')) {
             return; 
+        }
+
+        // NEW: If it's the very first tap/click, start the music but DO NOT stop the scroll!
+        if (e && (e.type === 'touchstart' || e.type === 'mousedown') && !firstTouchDone) {
+            firstTouchDone = true;
+            if (weddingAudio.paused) {
+                weddingAudio.play().catch(() => console.log("Playback error"));
+            }
+            return; // Exit here so the auto-scroll keeps going
         }
 
         if (isAutoScrolling) {
@@ -426,7 +436,7 @@ window.addEventListener('load', () => {
     // Listen for manual user interaction to stop the scroll
     window.addEventListener('wheel', stopAutoScroll, { passive: true });       
     window.addEventListener('touchmove', stopAutoScroll, { passive: true });   
-    window.addEventListener('touchstart', stopAutoScroll, { passive: true }); // Added back to ensure taps on teleport buttons stop it instantly
+    window.addEventListener('touchstart', stopAutoScroll, { passive: true }); 
     window.addEventListener('mousedown', stopAutoScroll, { passive: true });   
     document.addEventListener('keydown', stopAutoScroll, { passive: true });   
 
