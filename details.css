@@ -4,10 +4,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Playfair+Display:ital,wght@1,400&family=Inter:wght@400;700;800&family=Montserrat:wght@800&display=swap');
 
 :root {
-    --navy: #1e293b;
-    --blue: #60a5fa;
+    --navy: #C2B294; /* Changed from #1e293b to match envelope flap */
+    --blue: #D8C9AC; /* Changed from #60a5fa to match envelope base */
     --beige: #fdfaf3;
-    --gold: #b48c68; /* The brownish-gold from the nav image */
+    --gold: #b48c68; 
     --light-gray: #cbd5e1;
     --border-color: #e2e8f0;
     --white: #ffffff;
@@ -48,7 +48,7 @@ body::before {
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: url("back.webp"); 
+    background-image: url("back1.webp"); 
     background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
@@ -151,8 +151,8 @@ body::before {
 }
 
 .photo-grid { 
-    display: grid; 
-    grid-template-columns: 1fr 1fr; 
+    display: flex; 
+    justify-content: center; 
     gap: 15px; 
     margin-bottom: 50px; 
 }
@@ -162,6 +162,8 @@ body::before {
     border-radius: 15px; 
     overflow: hidden; 
     height: 180px; 
+    width: 100%;
+    max-width: 220px; 
     box-shadow: 0 10px 20px rgba(0,0,0,0.05); 
 }
 
@@ -201,14 +203,15 @@ body::before {
 }
 
 .time-unit {
-    background: rgba(96, 165, 250, 0.1);
+    background: #ffffff; /* Changed to solid white for clarity */
     padding: 12px 0;
     border-radius: 12px;
-    width: 75px; /* Fixed width so boxes are identical */
+    width: 75px; 
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05); /* Optional: adds a soft shadow for better contrast */
 }
 
 .time-unit span {
@@ -267,25 +270,25 @@ body::before {
 
 .map-link-btn {
     display: inline-block;
-    padding: 14px 45px;      /* Creates that wide pill shape */
-    background: transparent;  /* No color inside the button */
-    border: 1.5px solid #60a5fa; /* The thin light blue line */
-    color: #60a5fa;           /* The matching blue text color */
-    border-radius: 50px;      /* Perfectly rounded capsule corners */
-    text-decoration: none;    /* Removes underline */
-    font-weight: 800;         /* Bold "typing" inside */
-    font-size: 13px;          /* Clean, small text size */
-    letter-spacing: 1.5px;    /* Adds space between letters like the image */
-    text-transform: uppercase; /* Makes it all caps */
+    padding: 14px 45px;
+    background: transparent;
+    border: 1.5px solid #C2B294; /* Changed from #60a5fa */
+    color: #C2B294;              /* Changed from #60a5fa */
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 800;
+    font-size: 13px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
     font-family: 'Inter', sans-serif;
     transition: all 0.3s ease;
 }
 
 /* Hover effect: slight color fill so the user knows it's clickable */
 .map-link-btn:hover {
-    background: rgba(96, 165, 250, 0.05); 
-    border-color: #3b82f6; /* Darkens slightly on hover */
-    color: #3b82f6;
+    background: rgba(194, 178, 148, 0.1); /* Very faint shade of #C2B294 */
+    border-color: #D8C9AC; /* Changed from #3b82f6 */
+    color: #D8C9AC;        /* Changed from #3b82f6 */
 }
 
 /* =========================================
@@ -543,9 +546,35 @@ body::before {
 /* Credit Badge */
 .credit-badge-container {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
     margin-top: 40px;
     padding-bottom: 20px;
+    gap: 10px;
+}
+
+.made-by-text {
+    font-size: 11px;
+    color: #94a3b8;
+    text-transform: lowercase;
+    letter-spacing: 1.5px;
+    font-weight: 700;
+}
+
+.mirzam-circular-logo {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%; /* Makes it a perfect circle */
+    object-fit: cover; /* Ensures the image fits without stretching */
+    border: 2px solid #cbd5e1;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Adds a small pop effect when clicked or hovered */
+.mirzam-circular-logo:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
 }
 
 .credit-oval-badge {
