@@ -40,19 +40,21 @@ body {
     overflow-x: hidden;
 }
 
-/* Fixed Background Image Logic */
+/* Fixed Background Image Logic - Mobile Friendly Fix */
 body::before {
     content: "";
     position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
+    width: 100vw;
+    height: 100vh;
+    height: 100dvh; /* Adapts to dynamic mobile toolbars */
     background-image: url("back1.webp"); 
     background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
     z-index: -1;
+    pointer-events: none;
 }
 
 /* =========================================
