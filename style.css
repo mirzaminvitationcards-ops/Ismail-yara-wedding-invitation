@@ -33,7 +33,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: #253346;
+    background: #D8C9AC;
     border-radius: 8px;
     box-shadow: 0 30px 70px rgba(0, 0, 0, 0.5);
 }
@@ -45,7 +45,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: #192231;
+    background: #C2B294;
     clip-path: polygon(0 0, 50% 62%, 100% 0);
     z-index: 5;
     transform-origin: top;
@@ -60,7 +60,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: #253346;
+    background: #D8C9AC;
     clip-path: polygon(0 35%, 50% 62%, 100% 35%, 100% 100%, 0 100%);
     z-index: 4;
     border-radius: 0 0 8px 8px;
@@ -74,7 +74,8 @@
     transform: translateX(-50%);
     width: 65px;
     height: 65px;
-    background: radial-gradient(circle at 35% 35%, #dc2626, #7f1d1d);
+    /* Deep rich bronze/dark brown gradient */
+    background: radial-gradient(circle at 35% 35%, #8a6545, #5c3a21);
     border-radius: 50%;
     z-index: 6;
     display: flex;
@@ -82,10 +83,10 @@
     align-items: center;
     color: white;
     box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
-    border: 2px solid #991b1b;
+    /* Very dark brown border to give it a heavy, stamped shadow effect */
+    border: 2px solid #3d2314;
     transition: opacity 0.3s ease, transform 0.3s ease;
 }
-
 /* --- THE INVITATION CARD --- */
 .invitation-card {
     position: absolute;
@@ -110,11 +111,11 @@
     display: flex !important;
     justify-content: center !important;
     align-items: center !important;
-    width: 70px; /* أو المقاس الذي تفضله */
+    width: 70px; 
     height: 70px;
     border-radius: 50%;
-    background: #1e293b; /* اللون الكحلي */
-    border: 2px solid #5dade2;
+    background: #C2B294; /* Changed from #1e293b */
+    border: 2px solid #D8C9AC; /* Changed from #5dade2 */
     margin: 0 auto 15px;
     overflow: hidden;
 }
@@ -122,7 +123,7 @@
     font-family: 'Cinzel', serif;
     font-size: 38px;
     letter-spacing: 3px;
-    color: #1e293b;
+    color: #C2B294; /* Changed from #1e293b */
     line-height: 1.1;
     font-weight: 700;
 }
@@ -131,7 +132,7 @@
     font-family: 'Playfair Display', serif;
     font-style: italic;
     font-size: 52px;
-    color: #5dade2;
+    color: #D8C9AC; /* Changed from #5dade2 */
     display: block;
     margin: 8px 0;
 }
@@ -146,8 +147,8 @@
 /* --- DATE SIZE INCREASE --- */
 .wedding-date { 
     font-weight: 700; 
-    color: #1e293b; 
-    font-size: 19px; /* Increased from 16px */
+    color: #C2B294; /* Changed from #1e293b */
+    font-size: 19px; 
     letter-spacing: 1px;
 }
 
@@ -162,7 +163,7 @@
     display: block;
     width: 80%;
     margin: 0 auto;
-    background: #2c3748;
+    background: #C2B294; /* Changed from #2c3748 */
     color: white;
     text-decoration: none;
     padding: 14px 0;
@@ -171,7 +172,10 @@
     font-size: 16px;
 }
 
-.open-btn:hover { background: #1e293b; transform: scale(1.03); }
+.open-btn:hover { 
+    background: #D8C9AC; /* Changed from #1e293b */
+    transform: scale(1.03); 
+}
 
 /* --- OPEN STATE ANIMATION --- */
 .envelope-wrapper.open .flap { transform: rotateX(180deg); z-index: 1; }
