@@ -129,7 +129,7 @@ body::before {
     font-family: 'Playfair Display', serif; 
     font-style: italic; 
     font-size: 28px; 
-    color: var(--blue); 
+    color: #64748b;
 }
 
 .name-finish-line { 
