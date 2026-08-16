@@ -259,10 +259,7 @@
             weddingAudio.addEventListener('play', updateMusicUI);
             weddingAudio.addEventListener('pause', updateMusicUI);
 
-            // Mobile Interaction Trigger
-            window.addEventListener('touchstart', () => {
-                if (weddingAudio.paused) weddingAudio.play().catch(() => {});
-            }, { once: true });
+            
 
             /* --- 3. RSVP & COUNTER LOGIC --- */
             function updateGuests(val) {
