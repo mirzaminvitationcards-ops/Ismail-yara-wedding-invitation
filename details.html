@@ -233,54 +233,7 @@
                 loadWishes();
             });
 
-           /* --- 2. SMART MUSIC LOGIC --- */
-
-const weddingAudio = document.getElementById("weddingMusic");
-const navMusicIcon = document.getElementById("navMusicIcon");
-const navMusicText = document.getElementById("navMusicText");
-
-// NEW: Check if the guest came from the "Open" button
-window.addEventListener('load', () => {
-    const urlParams = new URLSearchParams(window.location.search);
-    if (urlParams.get('play') === 'true') {
-        // Attempt to play immediately
-        let playPromise = weddingAudio.play();
-        if (playPromise !== undefined) {
-            playPromise.then(() => {
-                updateMusicUI(); // ADDED: Updates the button UI if autoplay succeeds
-            }).catch(error => {
-                console.log("Browser blocked cross-page autoplay. Awaiting first tap.");
-            });
-        }
-    }
-});
-
-// ADDED: Listens for play/pause events directly on the audio element to keep UI updated
-weddingAudio.addEventListener('play', updateMusicUI);
-weddingAudio.addEventListener('pause', updateMusicUI);
-
-function toggleMusic() {
-    if (weddingAudio.paused) {
-        weddingAudio.play().catch(e => console.log("Playback error"));
-    } else {
-        weddingAudio.pause();
-    }
-}
-
-            function updateMusicUI() {
-                if (weddingAudio.paused) {
-                    navMusicIcon.className = "fas fa-play";
-                    navMusicText.innerText = "Play";
-                } else {
-                    navMusicIcon.className = "fas fa-pause";
-                    navMusicText.innerText = "Stop";
-                }
-            }
-
-            weddingAudio.addEventListener('play', updateMusicUI);
-            weddingAudio.addEventListener('pause', updateMusicUI);
-
-            
+          
 
             /* --- 3. RSVP & COUNTER LOGIC --- */
             function updateGuests(val) {
@@ -419,33 +372,72 @@ setInterval(() => {
         }
     }
 
+ /* --- 2. SMART MUSIC LOGIC --- */
+const weddingAudio = document.getElementById("weddingMusic");
+const navMusicIcon = document.getElementById("navMusicIcon");
+const navMusicText = document.getElementById("navMusicText");
+
+// Check if the guest came from the "Open" button on the envelope
+window.addEventListener('load', () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('play') === 'true') {
+        let playPromise = weddingAudio.play();
+        if (playPromise !== undefined) {
+            playPromise.then(() => {
+                updateMusicUI(); // Updates the play/pause button automatically
+            }).catch(error => {
+                console.log("Browser blocked cross-page autoplay. Awaiting first tap.");
+            });
+        }
+    }
+});
+
+// Listens for play/pause events to keep UI updated
+weddingAudio.addEventListener('play', updateMusicUI);
+weddingAudio.addEventListener('pause', updateMusicUI);
+
+function toggleMusic() {
+    if (weddingAudio.paused) {
+        weddingAudio.play().catch(e => console.log("Playback error"));
+    } else {
+        weddingAudio.pause();
+    }
+}
+
+function updateMusicUI() {
+    if (weddingAudio.paused) {
+        if (navMusicIcon) navMusicIcon.className = "fas fa-play";
+        if (navMusicText) navMusicText.innerText = "Play";
+    } else {
+        if (navMusicIcon) navMusicIcon.className = "fas fa-pause";
+        if (navMusicText) navMusicText.innerText = "Pause";
+    }
+}
+
+
 /* --- AUTO SCROLL TO BOTTOM (WITH MANUAL OVERRIDE) --- */
 window.addEventListener('load', () => {
     let autoScrollId;
     let isAutoScrolling = true;
-    let firstTouchDone = false; // NEW: Tracks the first tap
+    let firstTouchDone = false; 
 
-    // Function to stop the scrolling completely
     function stopAutoScroll(e) {
-        // ONLY ignore the interaction if it is specifically the music button
         if (e && e.target && e.target.closest('[onclick="toggleMusic()"]')) {
             return; 
         }
 
-        // NEW: If it's the very first tap/click, start the music but DO NOT stop the scroll!
         if (e && (e.type === 'touchstart' || e.type === 'mousedown') && !firstTouchDone) {
             firstTouchDone = true;
             if (weddingAudio.paused) {
                 weddingAudio.play().catch(() => console.log("Playback error"));
             }
-            return; // Exit here so the auto-scroll keeps going
+            return; 
         }
 
         if (isAutoScrolling) {
             isAutoScrolling = false;
             cancelAnimationFrame(autoScrollId);
             
-            // Clean up event listeners once it's stopped
             window.removeEventListener('wheel', stopAutoScroll);
             window.removeEventListener('touchmove', stopAutoScroll);
             window.removeEventListener('mousedown', stopAutoScroll);
@@ -454,29 +446,26 @@ window.addEventListener('load', () => {
         }
     }
 
-    // Listen for manual user interaction to stop the scroll
     window.addEventListener('wheel', stopAutoScroll, { passive: true });       
     window.addEventListener('touchmove', stopAutoScroll, { passive: true });   
     window.addEventListener('touchstart', stopAutoScroll, { passive: true }); 
     window.addEventListener('mousedown', stopAutoScroll, { passive: true });   
     document.addEventListener('keydown', stopAutoScroll, { passive: true });   
 
-    // Wait 1.5 seconds before starting the scroll
+    // YOUR ORIGINAL DELAY IS KEPT HERE
     setTimeout(() => {
         function autoScroll() {
-            // Only continue if the user hasn't stopped it AND we haven't reached the bottom
             if (isAutoScrolling && (window.innerHeight + Math.ceil(window.scrollY) < document.documentElement.scrollHeight)) {
-                window.scrollBy(0, 1); // Scroll down by 1 pixel per frame
+                window.scrollBy(0, 1); 
                 autoScrollId = requestAnimationFrame(autoScroll);
             }
         }
-        
-        // Start the scroll only if the user didn't already scroll during the 1.5s delay
         if (isAutoScrolling) {
             autoScroll();
         }
     }, 1500); 
 });
+
         </script>
     </body>
     </html>
