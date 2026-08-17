@@ -27,17 +27,12 @@ html {
     scroll-behavior: smooth;
 }
 
-/* Remove background-attachment/fixed positioning bugs on mobile */
 body {
     margin: 0;
     padding: 0;
     font-family: 'Inter', sans-serif;
-    color: var(--navy);
-    background-image: url("back1.webp"); 
-    background-size: cover;
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-attachment: scroll; /* Lets it scroll naturally without glitches on iOS */
+    color: #000000;
+    background-color: var(--beige);
     min-height: 100vh;
     display: flex;
     justify-content: center;
@@ -45,10 +40,21 @@ body {
     overflow-x: hidden;
 }
 
-/* Fixed Background Image Logic - Mobile Friendly Fix */
+/* Fixed Background Image Logic */
 body::before {
-    display: none;
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("back1.webp"); 
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    z-index: -1;
 }
+
 /* =========================================
    3. MAIN CONTENT WRAPPER
    ========================================= */
@@ -79,20 +85,20 @@ body::before {
     letter-spacing: 2px; 
     line-height: 1.6; 
     margin-bottom: 20px; 
-    color: var(--navy);
+    color: #000000;
 }
 
 .blue-line { 
     width: 40px; 
     height: 1px; 
-    background-color: var(--light-gray); 
+    background-color: #000000; ; 
     margin: 0 auto 30px; 
 }
 
 .mini-blue-line { 
     width: 45px; 
     height: 2px; 
-    background-color: var(--blue); 
+    background-color: #000000;  
     margin: 40px auto 15px; 
 }
 
@@ -116,20 +122,20 @@ body::before {
     font-size: 11px; 
     font-weight: 700; 
     letter-spacing: 3px; 
-    color: #64748b; 
+    color: #000000;
 }
 
 .small-ampersand { 
     font-family: 'Playfair Display', serif; 
     font-style: italic; 
     font-size: 28px; 
-    color: #64748b;
+    color: #000000;
 }
 
 .name-finish-line { 
     width: 50px; 
     height: 2px; 
-    background: linear-gradient(90deg, transparent, var(--blue), transparent); 
+    background: linear-gradient(90deg, transparent, #000000 , transparent); 
     margin-top: 15px; 
 }
 
@@ -178,7 +184,7 @@ body::before {
     display: block; 
     font-size: 40px; 
     font-weight: 800; 
-    color: var(--navy); 
+    color: #000000; 
 }
 
 .big-date { 
@@ -218,7 +224,7 @@ body::before {
 .time-unit label { 
     font-size: 9px; 
     font-weight: 800; 
-    color: var(--blue); 
+     color: #000000; 
     display: block;
 }
 /* --- DAY SCHEDULE (TIMELINE) ALIGNMENT --- */
@@ -258,7 +264,7 @@ body::before {
 
 .venue-location { 
     font-size: 14px; 
-    color: #64748b; 
+    color: #000000;
     margin: 5px 0 15px; 
 }
 
@@ -266,8 +272,8 @@ body::before {
     display: inline-block;
     padding: 14px 45px;
     background: transparent;
-    border: 1.5px solid #C2B294; /* Changed from #60a5fa */
-    color: #C2B294;              /* Changed from #60a5fa */
+    border: 1.5px solid #000000;  /* Changed from #60a5fa */
+    color: #000000;             /* Changed from #60a5fa */
     border-radius: 50px;
     text-decoration: none;
     font-weight: 800;
@@ -281,8 +287,8 @@ body::before {
 /* Hover effect: slight color fill so the user knows it's clickable */
 .map-link-btn:hover {
     background: rgba(194, 178, 148, 0.1); /* Very faint shade of #C2B294 */
-    border-color: #D8C9AC; /* Changed from #3b82f6 */
-    color: #D8C9AC;        /* Changed from #3b82f6 */
+    border-color: #000000; /* Changed from #3b82f6 */
+   color: #000000;      /* Changed from #3b82f6 */
 }
 
 /* =========================================
@@ -317,7 +323,7 @@ body::before {
     padding-right: 25px; 
     font-size: 20px; 
     font-weight: 700; 
-    color: var(--navy);
+    color: #000000;
 }
 
 .dot-container {
@@ -386,7 +392,7 @@ body::before {
 
 .guest-label {
     font-size: 13px;
-    color: #64748b;
+    color: #000000;
     font-weight: 700;
 }
 
@@ -487,14 +493,14 @@ body::before {
 .wish-card h4 { 
     font-size: 14px; 
     font-weight: 800; 
-    color: var(--navy); 
+    color: #000000;
     text-transform: uppercase; 
     margin-bottom: 5px;
 }
 
 .wish-card p {
     font-size: 14px;
-    color: #475569;
+   color: #000000;
     line-height: 1.4;
 }
 
@@ -633,7 +639,7 @@ body::before {
 .nav-item {
     flex: 1;
     text-align: center;
-    color: var(--navy);
+    color:  var(--navy);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -734,15 +740,10 @@ body::before {
 /* =========================================
    14. MOBILE RESPONSIVENESS
    ========================================= */
-/* Ensure background image stays fixed and doesn't shift during mobile touch/viewport resizing */
 @media screen and (max-width: 768px) {
-    body::before {
-        background-attachment: scroll; /* Fixes mobile rendering bugs where fixed attachment acts like scroll */
-        position: fixed;
-        height: 100vh;
-        height: 100dvh; /* Adapts correctly to mobile browser address bar resizing */
+    .main-content {
+        padding: 40px 15px 140px 15px;
     }
-}
 
     .title { font-size: 24px; }
     .main-name { font-size: 28px; }
@@ -785,7 +786,7 @@ body::before {
     margin: 15px auto 0; /* Centers it and adds space from the button above */
     background: transparent;
     border: 1px solid #cbd5e1;
-    color: #64748b;
+    color: #000000;
     padding: 10px 20px;
     border-radius: 50px;
     font-size: 11px;
