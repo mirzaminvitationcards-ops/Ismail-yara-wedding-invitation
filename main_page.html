@@ -175,7 +175,7 @@
             <p class="wedding-date">September 04, 2026</p>
             <p class="invite-text">cordially invite.</p>
             
-            <a href="details.html?play=true" class="open-btn">Open</a>
+            <a href="#" onclick="trackOpenClick(event)" class="open-btn">Open</a>
         </div>
 
         <div class="envelope">
@@ -223,6 +223,54 @@
             e.stopPropagation();
             envelopeWrapper.classList.add('open');
         });
+    </script>
+
+    <!-- 3. FIREBASE AND TRACKING SCRIPTS -->
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+
+    <script>
+        // Initialize Firebase
+        const firebaseConfig = {
+            apiKey: "AIzaSyCB5tx5ffwZENpTqU9otGTvxjmlgqyjwQ",
+            authDomain: "ismail-yara-wedding.firebaseapp.com",
+            projectId: "ismail-yara-wedding",
+            storageBucket: "ismail-yara-wedding.firebasestorage.app",
+            messagingSenderId: "192107873346",
+            appId: "1:192107873346:web:db146674f6632ffb3759db"
+        };
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+
+        function trackOpenClick(e) {
+            e.preventDefault(); // Stop immediate navigation
+
+            // 1. Generate or retrieve the unique user ID
+            let myUserId = localStorage.getItem('wedding_user_id');
+            if (!myUserId) {
+                myUserId = 'user_' + Math.random().toString(36).substr(2, 9);
+                localStorage.setItem('wedding_user_id', myUserId);
+            }
+
+            // 2. Grab the name they entered in the popup
+            const guestName = localStorage.getItem('wedding_guest_name') || "Unknown Guest";
+            const btn = e.target;
+            btn.innerText = "Opening..."; 
+
+            // 3. Save to a new "envelope_opens" collection
+            // Using myUserId as the document ID ensures no duplicates
+            db.collection("envelope_opens").doc(myUserId).set({
+                name: guestName,
+                lastOpened: firebase.firestore.FieldValue.serverTimestamp()
+            }, { merge: true }).then(() => {
+                // 4. Navigate to the next page upon success
+                window.location.href = "details.html?play=true";
+            }).catch((error) => {
+                console.error("Tracking error: ", error);
+                // Fallback: still navigate if Firebase fails
+                window.location.href = "details.html?play=true";
+            });
+        }
     </script>
 </body>
 </html>
