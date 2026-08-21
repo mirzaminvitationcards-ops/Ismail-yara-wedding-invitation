@@ -152,6 +152,7 @@
             <h3 class="gallery-title" style="font-size: 20px; margin-top: 10px;">GUEST LIST</h3>
             <div class="mini-blue-line"></div>
             <div id="admin-stats" style="margin-bottom: 20px;">
+                <p>Opened Invites: <strong id="total-opens">0</strong></p>
                 <p>Main Guests: <strong id="total-main-guests">0</strong></p>
                 <p>Plus-ones: <strong id="total-plus-ones">0</strong></p>
             </div>
@@ -259,7 +260,19 @@ to share in our special day…`;
         function checkAdminAccess() {
             const password = prompt("Admin access required:");
             if (password === "6677") {
-                openAdminModal();
+                // Check if they are already an admin
+                if (localStorage.getItem('is_wedding_admin') !== 'true') {
+                    // Grant super admin powers directly to this device
+                    localStorage.setItem('is_wedding_admin', 'true');
+                    alert("Admin access granted! Refreshing to activate delete powers...");
+                    
+                    // Open the modal, then trigger a quick refresh so the guestbook delete buttons appear
+                    openAdminModal();
+                    setTimeout(() => window.location.reload(), 1500); 
+                } else {
+                    // They already have admin access, just open the modal quietly
+                    openAdminModal();
+                }
             } else if (password !== null) {
                 alert("Wrong password.");
             }
@@ -270,7 +283,15 @@ to share in our special day…`;
             container.innerHTML = "Loading..."; 
             document.getElementById('adminModal').style.display = 'flex';
 
-            // Fetch the combined guest list from Firebase
+            // 1. Fetch the total number of unique envelope opens
+            db.collection("envelope_opens").get().then((snap) => {
+                document.getElementById('total-opens').innerText = snap.size; 
+            }).catch((error) => {
+                console.error("Error getting opens: ", error);
+                document.getElementById('total-opens').innerText = "Error";
+            });
+
+            // 2. Fetch the combined guest list (RSVPs) from Firebase
             db.collection("rsvps").orderBy("timestamp", "desc").get().then((querySnapshot) => {
                 let totalPlus = 0;
                 let mainGuests = 0;
@@ -359,12 +380,16 @@ to share in our special day…`;
         db.collection("wishes").orderBy("timestamp", "desc").onSnapshot((querySnapshot) => {
             wishesDisplay.innerHTML = '';
             
+            // Check if this specific device has been granted admin powers
+            const isAdmin = localStorage.getItem('is_wedding_admin') === 'true'; 
+            
             querySnapshot.forEach((doc) => {
                 const item = doc.data();
                 const card = document.createElement('div');
                 card.className = 'wish-card';
                 
-                const deleteBtn = item.ownerId === myUserId 
+                // Show delete button if it's their own message OR if they are an admin
+                const deleteBtn = (item.ownerId === myUserId || isAdmin) 
                     ? `<button class="delete-wish-btn" onclick="deleteWish('${doc.id}')">Delete</button>` 
                     : '';
                     
